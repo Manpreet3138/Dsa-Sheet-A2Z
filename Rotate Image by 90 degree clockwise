@@ -1,0 +1,27 @@
+import java.util.* ;
+import java.io.*; 
+import java.util.ArrayList;
+
+public class Solution {
+	public static ArrayList<ArrayList<Integer>> rotateMatrix(ArrayList<ArrayList<Integer>> matrix){
+		int n=matrix.size();
+		int m=matrix.get(0).size();
+
+		for(int i=0;i<n;i++)
+		{
+			Collections.reverse(matrix.get(i));
+		}
+
+		for(int i=0;i<n;i++)
+		{
+			for(int j=i;j<m;j++)
+			{
+				int temp=matrix.get(i).get(j);
+				matrix.get(i).set(j,matrix.get(j).get(i));
+				matrix.get(j).set(i,temp);
+			}
+		}
+
+		return matrix;
+	}
+}
