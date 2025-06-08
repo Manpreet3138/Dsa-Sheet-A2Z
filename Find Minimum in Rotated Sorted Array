@@ -9,6 +9,7 @@ public class Solution {
             if(nums[low]<=nums[high])
             {
                 ans=Math.min(ans,nums[low]);
+                break;
             }
             if(nums[low]<=nums[mid])
             {
