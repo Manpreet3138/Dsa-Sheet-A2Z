@@ -1,0 +1,16 @@
+class Solution {
+    public static boolean areIsomorphic(String str1, String str2) {
+        if(str1.length()!=str2.length()) return false;
+        int[] ch1=new int[256];
+        int[] ch2=new int[256];
+        for(int i=0;i<str1.length();i++)
+        {
+            char s=str1.charAt(i);
+            char t=str2.charAt(i);
+            if(ch1[s]!=ch2[t]) return false;
+            ch1[s]=i+1;
+            ch2[t]=i+1;
+        }
+        return true;
+    }
+}
