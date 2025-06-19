@@ -1,0 +1,24 @@
+class Solution {
+    public String frequencySort(String s) {
+        int n=s.length();
+        if(n==1||n==2) return s;
+        HashMap<Character, Integer> map= new HashMap<>();
+        StringBuffer b=new StringBuffer(n);
+        for(int i=0;i<n;i++)
+        {
+            char c=s.charAt(i);
+            if(!map.containsKey(c)) map.put(c,1);
+            else map.merge(c,1,Integer::sum);
+        }
+
+         List<Character> sortedKeys = new ArrayList<>(map.keySet());
+        sortedKeys.sort((a, c) -> map.get(c) - map.get(a));
+
+        int m=map.size();
+        for(Character ch:sortedKeys)
+        {
+            b.append(String.valueOf(ch).repeat(map.get(ch)));
+        }
+        return b.toString();
+    }
+}
