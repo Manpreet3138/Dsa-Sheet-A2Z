@@ -1,0 +1,30 @@
+public class Solution {
+    public static int sumOfBeauty(String s) {
+        int n = s.length();
+        int beauty = 0;
+
+        for (int i = 0; i < n; i++) {
+            int[] ch = new int[26];
+
+            for (int j = i; j < n; j++) {
+                ch[s.charAt(j) - 'a']++;  // build frequency for current substring
+                beauty += leastmost(ch); // pass current frequency to compute beauty
+            }
+        }
+        return beauty;
+    }
+
+    public static int leastmost(int[] ch) {
+        int max = Integer.MIN_VALUE;
+        int min = Integer.MAX_VALUE;
+
+        for (int i = 0; i < 26; i++) {
+            if (ch[i] > 0) { // ignore characters not present
+                max = Math.max(max, ch[i]);
+                min = Math.min(min, ch[i]);
+            }
+        }
+
+        return max - min;
+    }
+}
