@@ -1,0 +1,47 @@
+import java.util.* ;
+import java.io.*; 
+
+/************************************************************
+
+ Following is the linkedList class structure:
+
+ class Node<T> {
+ T data;
+ Node<T> next;
+ Node<T> prev;
+
+ public Node(T data) {
+ this.data = data;
+ }
+ }
+
+ ************************************************************/
+
+public class Solution {
+
+    static Node deleteNode(Node head, int x) {
+        Node temp=head;
+        if(head==null) return null;
+        if(x==0)
+        {
+            head=head.next;
+            if(head!=null) head.prev=null;
+            return head;
+        }
+        for(int i=0;i<x;i++)
+        {
+            if(temp.next==null) return null;
+            temp=temp.next;
+        }
+        if(temp.next==null)
+        {
+            temp.prev.next=null;
+        }
+        else
+        {
+            temp.prev.next=temp.next;
+            temp.next.prev=temp.prev;
+        }
+        return head;
+    }
+}
