@@ -1,0 +1,17 @@
+class Solution {
+    Node deleteMid(Node head) {
+        if(head==null || head.next==null) return null;
+        Node slow=head;
+        Node fast=head;
+        Node temp=head;
+        while(fast!=null && fast.next!=null)
+        {
+            temp=slow;
+            fast=fast.next.next;
+            slow=slow.next;
+        }
+        
+        temp.next=slow.next;
+        return head;
+    }
+}
