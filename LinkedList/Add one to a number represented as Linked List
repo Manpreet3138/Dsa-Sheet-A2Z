@@ -1,0 +1,46 @@
+public class Solution {
+	public static Node addOne(Node head) {
+		if(head==null) return null;
+        Node temp=head;
+        while(temp.next!=null)
+        {
+            temp=temp.next;
+        }
+        int val=temp.data;
+        val=val+1;
+        if(val==10)
+        {
+            temp.data=0;
+            return update(head,temp);
+            
+        }
+        temp.data=val;;
+        return head;
+    }
+    public static Node update(Node head,Node last)
+    {
+        if(head==last)
+        {
+            Node n=new Node(1);
+            n.next=head;
+            head=n;
+            return head;
+        }
+        Node temp=head;
+        while(temp.next!=last)
+        {
+            temp=temp.next;
+        }
+        int val=temp.data;
+        val=val+1;
+        if(val==10)
+        {
+            temp.data=0;
+            return update(head,temp);
+            
+        }
+        temp.data=val;;
+        return head;
+    }
+
+}
