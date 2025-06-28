@@ -1,0 +1,45 @@
+class Solution {
+    static Node segregate(Node head) {
+        Node zero=new Node(-1);
+        Node one=new Node(-1);
+        Node two=new Node(-1);
+        Node zerot=zero;
+        Node onet=one;
+        Node twot=two;
+        
+        Node cur=head;
+        while(cur!=null)
+        {
+            int val=cur.data;
+            if(val==0)
+            {
+                zerot.next=cur;
+                zerot=cur;
+            }
+            else if(val==1)
+            {
+                onet.next=cur;
+                onet=cur;
+            }
+            else
+            {
+                twot.next=cur;
+                twot=cur;
+            }
+            cur=cur.next;
+        }
+        
+        if(one.next!=null) zerot.next=one.next;
+        else zerot.next=two.next;
+            
+        onet.next=two.next;
+        twot.next=null;
+        
+        head=zero.next;
+        zero.next=null;
+        one.next=null;
+        two.next=null;
+        
+        return head;
+    }
+}
