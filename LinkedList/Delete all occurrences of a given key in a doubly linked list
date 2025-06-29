@@ -1,0 +1,27 @@
+public class Solution {
+    public static Node deleteAllOccurrences(Node head, int x) {
+        if(head==null) return null;
+        if(head.next==null) return (head.data==x)? null:head;
+        Node temp=head;
+        while(temp!=null)
+        {
+            Node next=temp.next;
+            if(temp.data==x)
+            {
+                if(temp==head)
+                {
+                    head=temp.next;
+                    temp.prev=null;
+                }
+                else if(temp.next==null) temp.prev.next=null;
+                else
+                {
+                    temp.next.prev=temp.prev;
+                    temp.prev.next=temp.next;
+                }
+            }
+            temp=next;
+        }
+        return head;
+    }
+}
