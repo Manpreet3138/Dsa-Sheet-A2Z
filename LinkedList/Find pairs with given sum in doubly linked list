@@ -1,0 +1,22 @@
+class Solution {
+    public static ArrayList<ArrayList<Integer>> findPairsWithGivenSum(int target,Node head) {
+        ArrayList<ArrayList<Integer>> list=new ArrayList<>();
+        if(head==null || head.next==null) return list;
+        Node left=head;
+        Node right=head;
+        while(right.next!=null) right=right.next;
+        while(left!=right && left!=null && right!=null && left.data<right.data)
+        {
+            int sum=left.data+right.data;
+            if(sum==target)
+            {
+                list.add(new ArrayList<>(Arrays.asList(left.data, right.data)));
+                left=left.next;
+                right=right.prev;
+            }
+            else if(sum<target) left=left.next;
+            else right=right.prev;
+        }
+        return list;
+    }
+}
