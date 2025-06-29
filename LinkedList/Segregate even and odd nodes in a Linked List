@@ -1,0 +1,28 @@
+class Solution {
+    Node divide(Node head) {
+        if(head==null || head.next==null) return head;
+        Node even=new Node(-1);
+        Node etail=even;
+        Node odd=new Node(-1);
+        Node otail=odd;
+        Node temp=head;
+
+        while(temp!=null)
+        {
+            if(temp.data%2==0)
+            {
+                etail.next=temp;
+                etail=etail.next;
+            }
+            else
+            {
+                otail.next=temp;
+                otail=otail.next;
+            }
+            temp=temp.next;
+        }
+        otail.next=null;
+        etail.next=odd.next;
+        return even.next;
+    }
+}
