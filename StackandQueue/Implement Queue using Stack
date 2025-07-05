@@ -1,0 +1,26 @@
+import java.util.*;
+class MyQueue {
+    Stack<Integer> s=new Stack<>();
+    public MyQueue() {
+        
+    }
+    
+    public void push(int x) {
+        Stack<Integer> temp=new Stack<>();
+        while(!s.isEmpty()) temp.push(s.pop());
+        s.push(x);
+        while(!temp.isEmpty()) s.push(temp.pop());
+    }
+    
+    public int pop() {
+        if(s.isEmpty()) return -1;
+        return s.pop();
+    }
+    
+    public int peek() {
+        return s.peek();
+    }
+    
+    public boolean empty() {
+        return s.isEmpty();    }
+}
