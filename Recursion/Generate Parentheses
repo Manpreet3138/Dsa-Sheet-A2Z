@@ -1,0 +1,19 @@
+import java.util.*;
+class Solution {
+    public List<String> generateParenthesis(int n) {
+        if(n==0) return new ArrayList<>();
+        List<String> list=new ArrayList<>();
+        generate(n,list,"",0,0);
+        return list;
+    }
+    public void generate(int n,List<String> list,String sb,int open,int close)
+    {
+        if(sb.length()==n*2) 
+        {
+            list.add(sb);
+            return ;
+        }
+        if(open<n) generate(n,list,sb+"(",open+1,close);
+        if(close<open) generate(n,list,sb+")",open,close+1);
+    }
+}
