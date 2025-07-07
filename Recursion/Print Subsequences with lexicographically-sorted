@@ -1,0 +1,22 @@
+class Solution {
+    public List<String> AllPossibleStrings(String input) {
+        List<String> a=new ArrayList<>();
+        generate("",input,a);
+        Collections.sort(a);
+        return a;
+	}
+	public static void generate(String str,String input,List<String> a)
+	{
+		if(input.isEmpty())
+		{
+		    if(!str.isEmpty())
+		    {
+			    a.add(str);
+		    }
+		    return ;
+		}
+		char ch=input.charAt(0);
+		generate(str+ch,input.substring(1),a);
+		generate(str,input.substring(1),a);
+	}
+}
