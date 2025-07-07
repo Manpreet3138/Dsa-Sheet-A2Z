@@ -1,0 +1,23 @@
+class Solution {
+    public List<List<Integer>> subsets(int[] nums) {
+        int n=nums.length;
+        if(n==0) return new ArrayList<>();
+        List<List<Integer>> list=new ArrayList<>();
+        ArrayList<Integer> arr=new ArrayList<>();
+        generate(0,list,nums,arr);
+        return list;
+    }
+    public void generate(int i,List<List<Integer>> list,int[] nums,ArrayList<Integer> arr)
+    {
+        if(nums.length==i)
+        {
+            list.add(new ArrayList<>(arr));
+            return ;
+        }
+        ArrayList<Integer> include=new ArrayList<>(arr);
+        include.add(nums[i]);
+        generate(i+1,list,nums,include);
+        generate(i+1,list,nums,arr);
+
+    }
+}
