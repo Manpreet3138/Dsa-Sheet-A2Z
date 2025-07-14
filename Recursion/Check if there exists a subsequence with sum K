@@ -1,0 +1,17 @@
+class Solution {
+    public static boolean checkSubsequenceSum(int N, int[] arr, int K) {
+        return check(arr,K,0,0);
+        
+    }
+    
+    public static boolean check(int[] arr,int k,int sum,int i)
+    {
+        if(i==arr.length)
+        {
+            return sum==k;
+        }
+        if(check(arr,k,sum+arr[i],i+1)) return true;
+        if(check(arr,k,sum,i+1)) return true;
+        return false;
+    }
+}
