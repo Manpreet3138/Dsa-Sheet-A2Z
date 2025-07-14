@@ -1,0 +1,27 @@
+import java.util.*;
+import java.io.*;
+
+public class Solution {
+    public static final int MOD=1_000_000_007;
+    static int count=0;
+
+    public static int findWays(int nums[], int tar) {
+        ways(nums,tar,0,0);
+        return count;
+    }
+
+    public static void ways(int nums[], int tar,int sum,int i) 
+    {
+        if(i==nums.length)
+        {
+            if(sum==tar)
+            {
+                count=(count+1)%MOD;
+            }
+            return ;
+        }
+
+        ways(nums,tar,sum+nums[i],i+1);
+        ways(nums,tar,sum,i+1);
+    }
+}
