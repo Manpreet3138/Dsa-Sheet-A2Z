@@ -1,0 +1,28 @@
+class Solution {
+    int count=0;
+    static final int MOD=1_000_000_007;
+    public int numSubseq(int[] nums, int target) {
+        countsubseq(nums,0,0,target,Integer.MAX_VALUE,Integer.MIN_VALUE);
+        return count;
+    }
+
+    public void countsubseq(int[] nums,int i,int size,int target,int min,int max)
+    {
+        if(i==nums.length)
+        {
+            if(size>0 && (min+max)<=target)
+            {
+                count=(count+1)%MOD;
+            }
+            return ;
+        }
+
+        countsubseq(nums,i+1,size,target,min,max);
+        int newMin=(size==0)?nums[i]:Math.min(min,nums[i]);
+        int newMax=(size==0)?nums[i]:Math.max(max,nums[i]);
+
+        countsubseq(nums,i+1,size+1,target,newMin,newMax);
+
+        
+    }
+}
