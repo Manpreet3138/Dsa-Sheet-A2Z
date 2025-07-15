@@ -1,0 +1,32 @@
+// User function template for JAVA
+
+class Solution {
+    static ArrayList<ArrayList<Integer>> uniqueCombinations(int[] arr, int target) {
+        ArrayList<ArrayList<Integer>> list=new ArrayList<>();
+        Arrays.sort(arr);
+        combinations(arr,target,list,new ArrayList<>(),0,0);
+        return list;
+    }
+
+    public static void combinations(int[] arr,int target,ArrayList<ArrayList<Integer>> list,ArrayList<Integer> com,int sum,int i)
+    {
+        if (sum == target) {
+            list.add(new ArrayList<>(com));
+            return;
+        }
+
+        if (i == arr.length || sum > target) {
+            return;
+        }
+        ArrayList<Integer> include=new ArrayList<>(com);
+        include.add(arr[i]);
+        int newSum=sum+arr[i];
+        combinations(arr,target,list,include,newSum,i+1);
+        int nextIndex = i + 1;
+        while (nextIndex < arr.length && arr[nextIndex] == arr[i]) {
+            nextIndex++;
+        }
+
+        combinations(arr, target, list, new ArrayList<>(com), sum, nextIndex);
+    }
+}
