@@ -1,0 +1,18 @@
+class Solution {
+    public ArrayList<Integer> subsetSums(int[] arr) {
+        ArrayList<Integer> list=new ArrayList<>();
+        setSum(arr,list,0,0);
+        return list;
+    }
+    
+    public void setSum(int[] arr,ArrayList<Integer> list,int sum,int i)
+    {
+        if(i==arr.length) 
+        {
+            list.add(sum);
+            return ;
+        }
+        setSum(arr,list,sum+arr[i],i+1);
+        setSum(arr,list,sum,i+1);
+    }
+}
