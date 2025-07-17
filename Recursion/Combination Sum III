@@ -1,0 +1,29 @@
+import java.util.* ;
+import java.io.*; 
+import java.util.ArrayList;
+
+public class Solution {
+
+    static ArrayList<ArrayList<Integer>> combinationSum3(int k, int n) {
+        ArrayList<ArrayList<Integer>> list=new ArrayList<>();
+        comb(k,n,list,new ArrayList<>(),1,0);
+        return list;
+    }
+
+    public static void comb(int leng,int n,ArrayList<ArrayList<Integer>> list,ArrayList<Integer> arr,int i,int sum)
+    {
+        if(i>9 || arr.size()==leng)
+        {
+            if(sum==n && arr.size()==leng)
+            {
+                list.add(new ArrayList<>(arr));
+            }
+            return ;
+        }
+
+        ArrayList<Integer> include=new ArrayList<>(arr);
+        include.add(i);
+        comb(leng,n,list,include,i+1,sum+i);
+        comb(leng,n,list,new ArrayList<>(arr),i+1,sum);
+    }
+}
