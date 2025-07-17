@@ -1,0 +1,23 @@
+class Solution {
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+        List<List<Integer>> list =new ArrayList<>();
+        Arrays.sort(nums);
+        subSet(nums,list,new ArrayList<>(),0);
+        return list;
+    }
+
+    public void subSet(int[] nums,List<List<Integer>> list,ArrayList<Integer> arr,int i)
+    {
+        if(i==nums.length)
+        {
+            list.add(new ArrayList<>(arr));
+            return ;
+        }
+        ArrayList<Integer> include=new ArrayList<>(arr);
+        include.add(nums[i]);
+        subSet(nums,list,include,i+1);
+        int newIndex=i+1;
+        while(newIndex<nums.length && nums[i]==nums[newIndex]) newIndex++;
+        subSet(nums,list,new ArrayList<>(arr),newIndex);
+    }
+}
