@@ -1,0 +1,59 @@
+import java.util.*;
+public class Solution {
+    public static String infixToPostfix(String s) {
+        
+        String ans=new String("");
+        Stack<Character> stk=new Stack<>();
+
+        for(int i=0;i<s.length();i++)
+        {
+            char ch=s.charAt(i);
+            if(Character.isLetterOrDigit(ch)) ans=ans+ch;
+            
+            else if(ch=='(') stk.push(ch);
+            
+            else if(ch==')')
+            {
+                while(!stk.isEmpty() && stk.peek()!='(')
+                {
+                    ans+=stk.pop();
+                   
+                }
+                stk.pop();
+            }
+            else
+            {
+                while(!stk.isEmpty() && prec(ch)<=prec(stk.peek()))
+                {
+                    ans+=stk.pop();
+                }
+                stk.push(ch);
+            }
+        }
+        
+        while(!stk.isEmpty())
+        {
+            if(stk.peek()=='(') return "Invalid Expression";
+            
+            ans+=stk.pop();
+        }
+        return ans;
+        
+    }
+    
+    static int prec(char ch)
+    {
+        switch(ch)
+        {
+            case '+':
+            case '-':
+                return 1;
+            case '*':
+            case '/':
+                return 2;
+            case '^':
+                return 3;
+        }
+        return -1;
+    }
+}
