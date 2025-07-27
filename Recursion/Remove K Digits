@@ -1,0 +1,35 @@
+class Solution {
+    String minResult = null;
+
+    public String removeKdigits(String num, int k) {
+        int targetLength = num.length() - k;
+        if (targetLength == 0) return "0";
+        
+        backtrack("", num, targetLength);
+        
+
+        int i = 0;
+        while (i < minResult.length() && minResult.charAt(i) == '0') i++;
+        String result = minResult.substring(i);
+        
+        return result.isEmpty() ? "0" : result;
+    }
+
+    private void backtrack(String path, String remaining, int targetLength) {
+        if (path.length() > targetLength) return;
+        if (path.length() + remaining.length() < targetLength) return;
+
+        if (remaining.isEmpty()) {
+            if (path.length() == targetLength) {
+                if (minResult == null || path.compareTo(minResult) < 0) {
+                    minResult = path;
+                }
+            }
+            return;
+        }
+
+        backtrack(path + remaining.charAt(0), remaining.substring(1), targetLength);
+
+        backtrack(path, remaining.substring(1), targetLength);
+    }
+}
