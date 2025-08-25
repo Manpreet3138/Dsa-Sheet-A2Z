@@ -1,0 +1,33 @@
+import java.util.*;
+class Solution {
+    public int maximalRectangle(char[][] matrix) {
+        int n=matrix.length;
+        int m=matrix[0].length;
+        int maxArea=0;
+        int[][] presum=new int[n][m];
+        for(int j=0;j<m;j++)
+        {
+            int sum=0;
+            for(int i=0;i<n;i++)
+            {
+                sum=(matrix[i][j]=='0')?0:sum+1;
+                presum[i][j]=sum;
+            }
+        }
+
+        for (int j = 0; j < n; j++) {
+            Stack<Integer> stk = new Stack<>();
+            for (int i = 0; i <= m; i++) {
+                int h = (i == m ? 0 : presum[j][i]); // sentinel 0 at end
+                while (!stk.isEmpty() && h < presum[j][stk.peek()]) { // FIX: use <
+                    int height = presum[j][stk.pop()];
+                    int width = stk.isEmpty() ? i : i - stk.peek() - 1;
+                    maxArea = Math.max(maxArea, height * width);
+                }
+                stk.push(i);
+            }
+        
+        }
+        return maxArea;
+    }
+}
